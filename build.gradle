@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    }
+    dependencies {
+        classpath 'org.robovm:robovm-gradle-plugin:1.1.0'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'robovm'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+ext {
+    roboVMVersion = "1.1.0"
+}
+
+robovm {
+}
+
+sourceSets {
+    main {
+        scala {
+            srcDirs = ['src/main/scala']
+        }
+    }
+}    
+
+dependencies {
+    compile "org.robovm:robovm-rt:${roboVMVersion}"
+    compile "org.robovm:robovm-cocoatouch:${roboVMVersion}"
+
+    compile "io.argonaut:argonaut_2.11:6.0.4"
+    compile "org.jasypt:jasypt:1.9.2"
+
+    testCompile "junit:junit:4.12"
+}
